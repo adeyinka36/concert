@@ -4,10 +4,15 @@ import { FaBars } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
 import { MouseEventHandler, useState, MouseEvent, useRef}  from 'react';
 import React from 'react';
+import {useSelector} from "react-redux";
 
 
 
 const Con = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     background-color: ${({theme})=>theme.colors.main};
     padding-left: 1rem;
     padding-right: 1rem;
@@ -91,10 +96,11 @@ const Con = styled.div`
              margin-right: 1rem;
              margin-bottom: 0;
              font-weight: 1000;
+             border-bottom: 3px solid rgba(0,0,0,0);
              &:hover{
                 background-color: ${({theme})=>theme.colors.main};
                 color: black;
-                border-bottom: 3px solid black;
+                border-bottom: 3px solid rgba(0,0,0,1);
              }
             }
         }
@@ -105,6 +111,13 @@ const Con = styled.div`
 const Header: React.FC<{}> = (props: any) =>{
         const [showMenu, setShowMenu]= useState<boolean>(false) ;
         const menu = useRef <HTMLUListElement>(null);
+        let animate = useSelector((state: any)=>state.headerAnimation);
+        console.log(animate)
+
+       // if(main) {
+       //     observer.observe(main!)
+       // }
+
 
         // @ts-ignore
     const handleShowMenu = (event:   MouseEventHandler<SVGElement, MouseEvent>) =>{
@@ -118,7 +131,7 @@ const Header: React.FC<{}> = (props: any) =>{
 
         }
     return(
-        <Con >
+        <Con>
             <nav>
                 <div className="logo-div">
                     <h1>CONCERT</h1>
