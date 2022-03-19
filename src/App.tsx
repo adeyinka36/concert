@@ -1,22 +1,29 @@
 import React from 'react';
-import {Provider} from "react-redux";
+
 
 import { ThemeProvider} from 'styled-components';
 import Header from "./components/Header";
 import Music from "./views/Music";
-import Dance from "./views/Dance";
+import Works from "./views/Works";
+import {useSelector} from "react-redux";
 
-const theme = {
-  colors:{
-    main: 'yellow'
-  }
-}
+
+
 function App() {
+    let animate = useSelector((state: any) => state.headerAnimation);
+    const theme = {
+        colors:{
+            main: 'yellow'
+        },
+        props:{
+            headerFont: animate
+        }
+    }
   return (
           <ThemeProvider theme={theme}>
             <Header/>
             <Music/>
-            <Dance/>
+            <Works/>
           </ThemeProvider>
   );
 }

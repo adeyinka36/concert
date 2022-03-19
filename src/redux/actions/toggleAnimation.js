@@ -1,7 +1,7 @@
-export const animate = ()=>{
+export const animate = () =>{
     return(dispatch)=>{
         dispatch({
-           type: 'animate'
+           type: 'increase'
         })
     }
 }
@@ -9,7 +9,7 @@ export const animate = ()=>{
 export const noAnimate = ()=>{
     return(dispatch)=>{
         dispatch({
-            type:'no-animate'
+            type:'decrease'
         })
     }
 }

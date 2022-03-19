@@ -1,11 +1,12 @@
-const headerAnimation = (action = {type: 'animate'}, payload) =>{
+const headerAnimation = (amount = true,action = {} ) =>{
+    console.log(action.payload)
     switch(action.type){
-        case 'animate':
-            return true
-        case 'no-animate':
-            return false
+        case 'increase':
+            return   true
+        case 'decrease':
+            return   false
         default:
-            return false;
+            return true
     }
 }
 
