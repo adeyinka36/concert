@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import works from '../assets/images/work.jpg';
-import {useState} from "react";
+import React from "react";
+import clients from '../assets/images/clients.jpg';
 
 const Con = styled.div`
-        background-image: url(${works});
+        background-image: url(${clients});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -33,6 +33,9 @@ const Con = styled.div`
           font-size: 3rem;
           z-index: 0;
         }
+        h1{
+          text-align: center;
+        }
         span{
             font-size: 2.5rem;
             margin-top: 3rem;
@@ -51,24 +54,16 @@ const Con = styled.div`
        
 `
 
-const Works = ()=>{
-    let [call, setCall] = useState('WORKS');
-    const comming = ()=>{
-        if(call === 'WORKS'){
-            setCall('COMMING SOON')
-        } else{
-            setCall('WORKS')
-        }
+const Clients: React.FC =  () =>{
 
-    }
-    return(
-        <Con>
-            <h1>SOME OF OUR</h1>
-            <h1>PAST AND PRESENT</h1>
-            <h1>EVENTS</h1>
-            <span>{call}</span>
-        </Con>
-    )
+
+    return <Con>
+            <h1>SOME OF THE CLIENTS</h1>
+            <h1>THAT WE HAVEW</h1>
+            <h1>WORKED WITH</h1>
+            <span>CLIENTS</span>
+           </Con>
 }
 
-export default Works
+
+export default Clients;

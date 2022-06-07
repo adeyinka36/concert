@@ -102,14 +102,6 @@ const Con = styled.div`
         
     }
     
-    // @media(min-width: 999px){
-    //     .logo-div{
-    //         h1{
-    //            left: 0 !important;
-    //         }
-    //     }
-    // }
-    
     @media(max-width: 767px){
         nav{
             ul{
@@ -118,7 +110,6 @@ const Con = styled.div`
         }
     }
     
-   
     //large screen styles
     @media(min-width: 768px) {
       .svg{

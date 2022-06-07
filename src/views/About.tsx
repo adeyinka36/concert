@@ -1,14 +1,15 @@
 import styled from 'styled-components';
-import works from '../assets/images/work.jpg';
-import {useState} from "react";
+import React from "react";
+import about from '../assets/images/about.jpg';
+
 
 const Con = styled.div`
-        background-image: url(${works});
+        background-image: url(${about});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        
         position: relative;
+        
         &:before {
             content: '';
                 position: absolute;
@@ -17,9 +18,8 @@ const Con = styled.div`
                 bottom: 0;
                 left: 0;
                 background-image: linear-gradient(to bottom right,#002f4b,#dc4225);
-                opacity: .7; 
+                opacity: .7;
         }
-        
         width: auto;
         min-height: 100vh;
         display: flex;
@@ -45,30 +45,22 @@ const Con = styled.div`
             }
         }
         
-         @media(max-width: 375px){
+        @media(max-width: 375px){
             h1,span{ font-size: 2rem}
         }
        
 `
 
-const Works = ()=>{
-    let [call, setCall] = useState('WORKS');
-    const comming = ()=>{
-        if(call === 'WORKS'){
-            setCall('COMMING SOON')
-        } else{
-            setCall('WORKS')
-        }
+const About: React.FC =  () =>{
 
-    }
-    return(
-        <Con>
-            <h1>SOME OF OUR</h1>
-            <h1>PAST AND PRESENT</h1>
-            <h1>EVENTS</h1>
-            <span>{call}</span>
-        </Con>
-    )
+
+    return <Con>
+            <h1>WE CREATE EVENTS</h1>
+            <h1>THAT BLOW</h1>
+            <h1>YOR MIND</h1>
+            <span>ABOUT</span>
+          </Con>
 }
 
-export default Works
+
+export default About;

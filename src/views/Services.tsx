@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import works from '../assets/images/work.jpg';
-import {useState} from "react";
+import React from "react";
+import services from '../assets/images/services.jpg';
 
 const Con = styled.div`
-        background-image: url(${works});
+        background-image: url(${services});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -51,24 +51,16 @@ const Con = styled.div`
        
 `
 
-const Works = ()=>{
-    let [call, setCall] = useState('WORKS');
-    const comming = ()=>{
-        if(call === 'WORKS'){
-            setCall('COMMING SOON')
-        } else{
-            setCall('WORKS')
-        }
+const Services: React.FC =  () =>{
 
-    }
-    return(
-        <Con>
-            <h1>SOME OF OUR</h1>
-            <h1>PAST AND PRESENT</h1>
-            <h1>EVENTS</h1>
-            <span>{call}</span>
-        </Con>
-    )
+
+        return <Con>
+                    <h1>EVER WONDER HOW</h1>
+                    <h1>THE PERFECT SHOW</h1>
+                    <h1>IS CREATED?</h1>
+                    <span>SERVICES</span>
+                </Con>
 }
 
-export default Works
+
+export default Services;
