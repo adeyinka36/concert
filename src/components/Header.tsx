@@ -88,6 +88,9 @@ const Con = styled.div`
             transition: margin 500ms;
             top: ${({theme})=> theme.props.headerFont ? '20vh': '0'};
             margin: ${({theme})=> theme.props.headerFont ? '0 auto': '.1rem'};
+            &:hover{
+              cursor: pointer;
+            }
             h1{
                 transition: font-size 500ms;
                 color: ${({theme})=> theme.props.headerFont ? 'rgba(255,255,0,.5)': 'rgba(255,255,0,1)'};
@@ -140,15 +143,13 @@ const Con = styled.div`
       }       
     }
 `
-
-const Header: React.FC<{}> = (props: any) =>{
+const Header = (props: any) =>{
         const [showMenu, setShowMenu] = useState<boolean>(false) ;
         const concertRef = useRef<HTMLHeadingElement>(null);
         const menu = useRef <HTMLUListElement>(null);
 
         // @ts-ignore
     const handleShowMenu = (event:   MouseEventHandler<SVGElement, MouseEvent>) =>{
-            console.log(menu.current);
             if(showMenu) {
                 menu.current!.style.right = '-200%';
                 menu.current!.style.backgroundColor = "rgba(255,255,0,0)";
@@ -172,16 +173,16 @@ const Header: React.FC<{}> = (props: any) =>{
     return(
         <Con>
             <nav>
-                <div className="logo-div">
+                <div className="logo-div" onClick={()=>props.scroll('home')}>
                     <h1 ref={concertRef}>ELEMENT</h1>
                 </div>
                 <FaBars onClick={handleShowMenu} className="svg burger"/>
                 <ul ref={menu}>
                     <li className="cancel svg">< MdCancel onClick={handleShowMenu}/></li>
-                    <li>WORK</li>
-                    <li>SERVICES</li>
-                    <li>CLIENTS</li>
-                    <li>ABOUT</li>
+                    <li onClick={()=>props.scroll('work')}>WORK</li>
+                    <li onClick={()=>props.scroll('services')}>SERVICES</li>
+                    <li onClick={()=>props.scroll('clients')}>CLIENTS</li>
+                    <li onClick={()=>props.scroll('about')}>ABOUT</li>
                 </ul>
             </nav>
         </Con>

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import works from '../assets/images/work.jpg';
-import {useState} from "react";
+import React, {forwardRef, useState} from "react";
 
 const Con = styled.div`
         background-image: url(${works});
@@ -51,24 +51,18 @@ const Con = styled.div`
        
 `
 
-const Works = ()=>{
+const Works = React.forwardRef((props: any, ref: any)=>{
     let [call, setCall] = useState('WORKS');
-    const comming = ()=>{
-        if(call === 'WORKS'){
-            setCall('COMMING SOON')
-        } else{
-            setCall('WORKS')
-        }
+    // @ts-ignore
 
-    }
     return(
         <Con>
-            <h1>SOME OF OUR</h1>
+            <h1 ref={ref}>SOME OF OUR</h1>
             <h1>PAST AND PRESENT</h1>
             <h1>EVENTS</h1>
             <span>{call}</span>
         </Con>
     )
-}
+})
 
 export default Works

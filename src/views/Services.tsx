@@ -51,16 +51,16 @@ const Con = styled.div`
        
 `
 
-const Services: React.FC =  () =>{
+const Services =  React.forwardRef((props: any, ref: any) =>{
 
 
         return <Con>
-                    <h1>EVER WONDER HOW</h1>
+                    <h1 ref={ref}>EVER WONDER HOW</h1>
                     <h1>THE PERFECT SHOW</h1>
                     <h1>IS CREATED?</h1>
                     <span>SERVICES</span>
                 </Con>
-}
+})
 
 
 export default Services;

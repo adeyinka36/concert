@@ -51,16 +51,16 @@ const Con = styled.div`
        
 `
 
-const About: React.FC =  () =>{
+const About =  React.forwardRef((props:any, ref: any) =>{
 
 
     return <Con>
-            <h1>WE CREATE EVENTS</h1>
+            <h1 ref={ref}>WE CREATE EVENTS</h1>
             <h1>THAT BLOW</h1>
             <h1>YOR MIND</h1>
             <span>ABOUT</span>
           </Con>
-}
+})
 
 
 export default About;

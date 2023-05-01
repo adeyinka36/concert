@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useDispatch } from "react-redux";
 import { allActions } from '../redux/actions/index';
 import { bindActionCreators } from "redux";
-import React, {useState, useRef, useEffect} from "react";
+import React, {useRef, useEffect} from "react";
 // @ts-ignore
 import concertVideo from '../assets/videos/concert.mp4';
 
@@ -26,7 +26,7 @@ const Con = styled.div`
         }
 `
 
-const Music: React.FC = ()=>{
+const Music= React.forwardRef( (props: any , ref:any)=>{
     const dispatch = useDispatch();
     const { animate, noAnimate } = bindActionCreators(allActions, dispatch);
     const main = useRef<HTMLDivElement>(null)
@@ -51,11 +51,11 @@ const Music: React.FC = ()=>{
 
     return(
         <Con ref={main} className="main" >
-            <video autoPlay muted loop id="concert-video">
+            <video ref={ref} autoPlay muted loop id="concert-video">
                 <source src={concertVideo} type="video/mp4"/>
             </video>
         </Con>
     )
-}
+})
 
 export default Music

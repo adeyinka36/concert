@@ -54,16 +54,16 @@ const Con = styled.div`
        
 `
 
-const Clients: React.FC =  () =>{
+const Clients =  React.forwardRef((props: any, ref:any) =>{
 
 
     return <Con>
-            <h1>SOME OF THE CLIENTS</h1>
-            <h1>THAT WE HAVEW</h1>
+            <h1 ref={ref}>SOME OF THE CLIENTS</h1>
+            <h1>THAT WE HAVE</h1>
             <h1>WORKED WITH</h1>
             <span>CLIENTS</span>
            </Con>
-}
+})
 
 
 export default Clients;
