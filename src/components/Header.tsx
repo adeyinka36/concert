@@ -1,9 +1,8 @@
 // @ts-ignore
-import styled, {StyledComponent} from 'styled-components';
+import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
-import React, { MouseEventHandler, useState, MouseEvent, useRef}  from 'react';
-import {useSelector} from "react-redux";
+import React, {MouseEventHandler, useState, MouseEvent, useRef, useEffect} from 'react';
 
 
 
@@ -76,7 +75,7 @@ const Con = styled.div`
             li{
                 margin-bottom: 1rem;
                 font-size: 2rem;
-                color: 'rgba(255,255,0,1)'
+                color: rgba(255,255,0,1);
             }
         }
         .logo-div{
@@ -147,9 +146,34 @@ const Header = (props: any) =>{
         const [showMenu, setShowMenu] = useState<boolean>(false) ;
         const concertRef = useRef<HTMLHeadingElement>(null);
         const menu = useRef <HTMLUListElement>(null);
+        const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+
+        useEffect(() => {
+            // Handler to call on window resize
+            const handleResize = () => {
+                // Set window width to state
+                setScreenWidth(window.innerWidth);
+            };
+
+            window.addEventListener('resize', handleResize);
+
+            handleResize();
+
+            // Remove event listener on cleanup
+            return () => window.removeEventListener('resize', handleResize);
+        }, []); // Empty array ensures that effect is only run on mount
+
+            const navigate = (location: string) =>{
+            props.scroll(location);
+            setShowMenu(false)
+            handleShowMenu()
+        }
 
         // @ts-ignore
-    const handleShowMenu = (event:   MouseEventHandler<SVGElement, MouseEvent>) =>{
+    const handleShowMenu = (event:   MouseEventHandler<SVGElement, MouseEvent> = null) =>{
+            if(  screenWidth > 768) {
+                return;
+            }
             if(showMenu) {
                 menu.current!.style.right = '-200%';
                 menu.current!.style.backgroundColor = "rgba(255,255,0,0)";
@@ -179,10 +203,10 @@ const Header = (props: any) =>{
                 <FaBars onClick={handleShowMenu} className="svg burger"/>
                 <ul ref={menu}>
                     <li className="cancel svg">< MdCancel onClick={handleShowMenu}/></li>
-                    <li onClick={()=>props.scroll('work')}>WORK</li>
-                    <li onClick={()=>props.scroll('services')}>SERVICES</li>
-                    <li onClick={()=>props.scroll('clients')}>CLIENTS</li>
-                    <li onClick={()=>props.scroll('about')}>ABOUT</li>
+                    <li onClick={()=>navigate('work')}>WORK</li>
+                    <li onClick={()=>navigate('services')}>SERVICES</li>
+                    <li onClick={()=>navigate('clients')}>CLIENTS</li>
+                    <li onClick={()=>navigate('about')}>ABOUT</li>
                 </ul>
             </nav>
         </Con>
