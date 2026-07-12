@@ -3,7 +3,7 @@ import React from "react";
 import clients from '../assets/images/clients.jpg';
 
 const Con = styled.div`
-        background-image: url(${clients});
+        background-image: url(${clients.src});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

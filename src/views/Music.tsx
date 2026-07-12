@@ -1,17 +1,12 @@
 import styled from 'styled-components'
-import { useDispatch } from "react-redux";
-import { allActions } from '../redux/actions/index';
-import { bindActionCreators } from "redux";
 import React, {useRef, useEffect} from "react";
-// @ts-ignore
-import concertVideo from '../assets/videos/concert.mp4';
 
 const Con = styled.div`
         width: auto;
         min-height: 100vh;
         position: relative;
         margin-bottom: 15vh;
-        overflow-x: clip;
+        overflow: hidden;
         *{
          overflow-x: hidden;
         }
@@ -19,25 +14,24 @@ const Con = styled.div`
             position: absolute;
             top: 0;
             left: 0;
-            min-width: 100%;
-            min-height: 100%;
-            z-index: -2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
             filter: brightness(55%);
         }
 `
 
 const Music= React.forwardRef( (props: any , ref:any)=>{
-    const dispatch = useDispatch();
-    const { animate, noAnimate } = bindActionCreators(allActions, dispatch);
     const main = useRef<HTMLDivElement>(null)
 
     useEffect(()=>{
         const observer = new IntersectionObserver((entries)=>{
             entries.forEach(entry=>{
                 if(entry.isIntersecting){
-                    animate()
+                    props.setHeaderAnimation(true)
                 } else {
-                    noAnimate()
+                    props.setHeaderAnimation(false)
                 }
             })
         },{
@@ -51,8 +45,8 @@ const Music= React.forwardRef( (props: any , ref:any)=>{
 
     return(
         <Con ref={main} className="main" >
-            <video ref={ref} autoPlay muted loop id="concert-video">
-                <source src={concertVideo} type="video/mp4"/>
+            <video ref={ref} autoPlay muted loop playsInline preload="auto" id="concert-video">
+                <source src="/videos/concert.mp4" type="video/mp4"/>
             </video>
         </Con>
     )

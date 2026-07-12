@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from 'react';
 
 
 import { ThemeProvider} from 'styled-components';
@@ -9,7 +9,6 @@ import Works from "./views/Works";
 import Clients from "./views/Clients";
 import About from "./views/About";
 import Services from "./views/Services";
-import {useSelector} from "react-redux";
 
 
 interface RefObject<T> {
@@ -23,7 +22,7 @@ function App() {
     const home: RefObject<any> = useRef()
     const about: RefObject<any> = useRef()
 
-    let animate = useSelector((state: any) => state.headerAnimation);
+    const [animate, setAnimate] = useState<boolean>(false);
     const theme = {
         colors:{
             main: 'yellow'
@@ -56,7 +55,7 @@ function App() {
     return (
           <ThemeProvider theme={theme}>
             <Header scroll={scroll}/>
-            <Music ref={home}/>
+            <Music ref={home} setHeaderAnimation={setAnimate} />
             <Works ref={work}/>
             <Services ref={services}/>
             <About ref={about}/>

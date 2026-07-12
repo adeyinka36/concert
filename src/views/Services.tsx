@@ -3,7 +3,7 @@ import React from "react";
 import services from '../assets/images/services.jpg';
 
 const Con = styled.div`
-        background-image: url(${services});
+        background-image: url(${services.src});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

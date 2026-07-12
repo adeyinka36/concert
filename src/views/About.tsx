@@ -4,7 +4,7 @@ import about from '../assets/images/about.jpg';
 
 
 const Con = styled.div`
-        background-image: url(${about});
+        background-image: url(${about.src});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
 import { MdCancel } from 'react-icons/md';
-import React, {MouseEventHandler, useState, MouseEvent, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 
 
@@ -13,7 +13,7 @@ const Con = styled.div`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    width: 100%;
     background-color: ${({theme})=> theme.props.headerFont ? 'rgba(0,0,0,0)': 'rgba(0,0,0,1)'};
     transition: opacity 500ms;
     padding-left: 1rem;
@@ -59,16 +59,15 @@ const Con = styled.div`
             font-size: 3.7rem;
         }
         ul{
-            background-color: ${({theme})=> theme.props.headerFont ? 'rgba(255,255,0,0)': 'rgba(255,255,0,0)'};
+            background-color: rgba(255,255,0,0);
             position: fixed;
             top: 0;
             right: -200%;
             width: 100vw;
             height: 100vh;
-            background-color: 
             display: flex;
             flex-direction: column;
-            justify-contents: space-around;
+            justify-content: space-around;
             align-items: center;
             transition: 1s;
             margin-top: ${({theme})=> theme.props.headerFont ? '1rem': '0'};
@@ -79,26 +78,28 @@ const Con = styled.div`
             }
         }
         .logo-div{
-            display: flex;
-            height: 100%;
-            position: relative;
-            transition: 1s;
-            width: 100vw;
+            display: ${({theme})=> theme.props.headerFont ? 'grid' : 'flex'};
+            place-items: ${({theme})=> theme.props.headerFont ? 'center' : 'normal'};
+            justify-content: ${({theme})=> theme.props.headerFont ? 'center' : 'flex-start'};
+            height: ${({theme})=> theme.props.headerFont ? '100vh' : '100%'};
+            position: ${({theme})=> theme.props.headerFont ? 'fixed' : 'relative'};
+            inset: ${({theme})=> theme.props.headerFont ? '0' : 'auto'};
+            flex: 1;
+            min-width: 0;
             transition: margin 500ms;
-            top: ${({theme})=> theme.props.headerFont ? '20vh': '0'};
-            margin: ${({theme})=> theme.props.headerFont ? '0 auto': '.1rem'};
+            margin: ${({theme})=> theme.props.headerFont ? '0': '.1rem'};
             &:hover{
               cursor: pointer;
             }
             h1{
                 transition: font-size 500ms;
                 color: ${({theme})=> theme.props.headerFont ? 'rgba(255,255,0,.5)': 'rgba(255,255,0,1)'};
-                font-size: ${({theme})=> theme.props.headerFont ? '20vw': '50px'};
-                position: ${({theme})=> theme.props.headerFont ? 'absolute': 'relative'};
-                width: ${({theme})=> theme.props.headerFont ? '100vw': '100%'};
-                text-align: ${({theme})=> theme.props.headerFont ? 'center': 'left'};;
-                letter-spacing: ${({theme})=> theme.props.headerFont ? '5vw': '.25rem'};
-                left: ${({theme})=> theme.props.headerFont ? '-1rem': '0'};
+                font-size: ${({theme})=> theme.props.headerFont ? 'clamp(3rem, 11vw, 8rem)': 'clamp(2rem, 4vw, 3.1rem)'};
+                position: relative;
+                width: ${({theme})=> theme.props.headerFont ? 'auto' : '100%'};
+                text-align: ${({theme})=> theme.props.headerFont ? 'center': 'left'};
+                letter-spacing: ${({theme})=> theme.props.headerFont ? 'clamp(.4rem, 1.8vw, 1.2rem)': '.25rem'};
+                left: 0;
             }
         }
         
@@ -112,7 +113,7 @@ const Con = styled.div`
         }
     }
     
-    //large screen styles
+    /* large screen styles */
     @media(min-width: 768px) {
       .svg{
         display: none !important;
@@ -146,7 +147,9 @@ const Header = (props: any) =>{
         const [showMenu, setShowMenu] = useState<boolean>(false) ;
         const concertRef = useRef<HTMLHeadingElement>(null);
         const menu = useRef <HTMLUListElement>(null);
-        const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+        const [screenWidth, setScreenWidth] = useState(
+            typeof window !== 'undefined' ? window.innerWidth : 1024
+        );
 
         useEffect(() => {
             // Handler to call on window resize
@@ -170,7 +173,7 @@ const Header = (props: any) =>{
         }
 
         // @ts-ignore
-    const handleShowMenu = (event:   MouseEventHandler<SVGElement, MouseEvent> = null) =>{
+    const handleShowMenu = () =>{
             if(  screenWidth > 768) {
                 return;
             }
@@ -178,7 +181,7 @@ const Header = (props: any) =>{
                 menu.current!.style.right = '-200%';
                 menu.current!.style.backgroundColor = "rgba(255,255,0,0)";
                 // @ts-ignore
-                let children = [...menu.current!.children];
+                const children = [...menu.current!.children] as HTMLElement[];
                 children.forEach(child=>{
                     child.style.color = "rgba(255,255,0,1)";
                 })
@@ -186,7 +189,7 @@ const Header = (props: any) =>{
                 menu.current!.style.right = '0';
                 menu.current!.style.backgroundColor = "rgba(255,255,0,1)";
                 // @ts-ignore
-                let children = [...menu.current!.children];
+                const children = [...menu.current!.children] as HTMLElement[];
                 children.forEach(child=>{
                     child.style.color = "rgba(0,0,0,1)";
                 })

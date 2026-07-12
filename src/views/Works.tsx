@@ -3,7 +3,7 @@ import works from '../assets/images/work.jpg';
 import React, {forwardRef, useState} from "react";
 
 const Con = styled.div`
-        background-image: url(${works});
+        background-image: url(${works.src});
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
